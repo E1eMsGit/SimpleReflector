@@ -55,14 +55,24 @@ namespace SimpleReflector.Model
 
             switch (member.MemberType)
             {
-                case MemberTypes.Constructor:            
+                case MemberTypes.Constructor:
+                    description.AppendLine($"Модификатор public: {((ConstructorInfo)member).IsPublic}");
+                    description.AppendLine($"Модификатор private: {((ConstructorInfo)member).IsPrivate}");
+                    description.AppendLine($"Модификатор static: {((ConstructorInfo)member).IsStatic}\n");
                     GetParametersDescription(((ConstructorInfo)member).GetParameters());
                     break;
                 case MemberTypes.Event:
                     break;
                 case MemberTypes.Field:
+                    description.AppendLine($"Модификатор public: {((FieldInfo)member).IsPublic}");
+                    description.AppendLine($"Модификатор private: {((FieldInfo)member).IsPrivate}");
+                    description.AppendLine($"Модификатор static: {((FieldInfo)member).IsStatic}\n");
+                    description.AppendLine($"Тип поля: {((FieldInfo)member).FieldType.Name}\n");
                     break;
                 case MemberTypes.Method:
+                    description.AppendLine($"Модификатор public: {((MethodInfo)member).IsPublic}");
+                    description.AppendLine($"Модификатор private: {((MethodInfo)member).IsPrivate}");
+                    description.AppendLine($"Модификатор static: {((MethodInfo)member).IsStatic}\n");
                     description.AppendLine($"Тип возвращаемого значения: {((MethodInfo)member).ReturnType.Name}\n");
                     GetParametersDescription(((MethodInfo)member).GetParameters());
                     break;
